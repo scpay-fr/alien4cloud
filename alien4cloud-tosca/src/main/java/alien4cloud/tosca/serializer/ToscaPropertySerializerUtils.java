@@ -42,7 +42,9 @@ public class ToscaPropertySerializerUtils {
             if (text == null) {
                 text = "";
             } else if (!VALID_YAML_PATTERN.matcher(text).matches() && !FLOAT_PATTERN.matcher(text).matches()) {
-                text = "\"" + text + "\"";
+                StringBuilder formattedTextBuffer = new StringBuilder(">\n");
+                formattedTextBuffer.append(indent((++indentLevel))).append(text);
+                text = formattedTextBuffer.toString();
             }
             return text;
         }
