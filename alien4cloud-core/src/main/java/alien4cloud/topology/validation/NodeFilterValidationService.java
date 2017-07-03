@@ -39,6 +39,8 @@ import alien4cloud.topology.task.NodeFilterToSatisfy.Violations;
 import alien4cloud.topology.task.NodeFiltersTask;
 import alien4cloud.topology.task.TaskCode;
 
+import static alien4cloud.utils.AlienUtils.safe;
+
 /**
  * Performs validation of node filters for all relationship of topology.
  */
@@ -115,7 +117,7 @@ public class NodeFilterValidationService {
 
                 validateNodeFilter(nodeFilter, targetNode, targetType, capabilityTypes, nodeFilterToSatisfy, skipInputs);
 
-                if (!nodeFilterToSatisfy.getViolations().isEmpty() || !nodeFilterToSatisfy.getMissingCapabilities().isEmpty()) {
+                if (!safe(nodeFilterToSatisfy.getViolations()).isEmpty() || !safe(nodeFilterToSatisfy.getMissingCapabilities()).isEmpty()) {
                     task.getNodeFiltersToSatisfy().add(nodeFilterToSatisfy);
                 }
             }
