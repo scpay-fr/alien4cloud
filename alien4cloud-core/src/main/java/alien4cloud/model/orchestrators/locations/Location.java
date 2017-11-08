@@ -11,6 +11,7 @@ import org.alien4cloud.tosca.model.CSARDependency;
 import org.elasticsearch.annotation.ESObject;
 import org.elasticsearch.annotation.Id;
 import org.elasticsearch.annotation.NestedObject;
+import org.elasticsearch.annotation.ObjectField;
 import org.elasticsearch.annotation.StringField;
 import org.elasticsearch.annotation.query.FetchContext;
 import org.elasticsearch.annotation.query.TermFilter;
@@ -68,4 +69,7 @@ public class Location extends AbstractSecurityEnabledResource implements IMetaPr
     private Date creationDate;
 
     private Date lastUpdateDate = new Date();
+
+    @ObjectField(enabled = false)
+    private Object secretProviderConfiguration;
 }
