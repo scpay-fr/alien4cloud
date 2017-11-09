@@ -8,11 +8,7 @@ import javax.annotation.Resource;
 import org.alien4cloud.secret.services.SecretProviderService;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import alien4cloud.rest.model.RestResponse;
 import alien4cloud.rest.model.RestResponseBuilder;
@@ -56,6 +52,17 @@ public class SecretController {
         return RestResponseBuilder.<Map<String, Object>> builder()
                 .data(pojoFormDescriptorGenerator.generateDescriptor(secretProviderService.getPluginConfigurationDescriptor(pluginName))).build();
     }
+
+    @ApiIgnore
+    @RequestMapping(value = "/plugins/location/{locationId}", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
+    public RestResponse<Map<String, Object>> getPluginConfigurationDescription2(@PathVariable("pluginName") String pluginName) {
+        // tout les plugins decsription
+        // + data
+        return RestResponseBuilder.<Map<String, Object>> builder()
+                .data(pojoFormDescriptorGenerator.generateDescriptor(secretProviderService.getPluginConfigurationDescriptor(pluginName))).build();
+    }
+
 
     /**
      * Retrieve a specific plugin configuration description.
