@@ -24,11 +24,13 @@ define(function (require) {
 
       $scope.currentPluginConfiguration = {
         pluginName: _.get($scope, 'uiModel.locationDTO.secretProviderConfigurations.currentConfiguration.pluginName'),
-        configuraiton: _.get($scope, 'uiModel.locationDTO.secretProviderConfigurations.currentConfiguration.configuration')
+        configuration: _.get($scope, 'uiModel.locationDTO.secretProviderConfigurations.currentConfiguration.configuration')
       };
       // populate the scope with the ncessary for location policies resources security
       //locationResourcesSecurity('rest/latest/orchestrators/:orchestratorId/locations/:locationId/policies', $scope);
-
+      $scope.saveConfiguration = function() {
+        $scope.updateLocation({'secretProviderConfiguration': $scope.currentPluginConfiguration});
+      };
     }
   ]);
 }); // define
